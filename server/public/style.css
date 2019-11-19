@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-ul, body {
+ul,
+body {
   margin: 0;
   padding: 0;
 }
@@ -89,4 +90,12 @@ li {
   color: red;
   font-size: 14px;
   margin-top: 10px;
+}
+
+.auth__error_hide {
+  display: none;
+}
+
+.auth__error_show {
+  display: block;
 }
