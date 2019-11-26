@@ -52,6 +52,7 @@ formManager.send = function () {
     var data = {
         name: this.name.value,
         email: this.email.value,
+        phone: this.phone.value,
         password: this.password.value,
         subscribe: this.subscribe.checked,
     }
