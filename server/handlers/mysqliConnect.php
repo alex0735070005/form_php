@@ -1,16 +1,51 @@
 <?php
 
-$link = mysqli_connect("127.0.0.1", "root", "1111", "website");
+function getUsers() {
+    $DB = mysqli_connect("127.0.0.1", "root", "1111", "website");
 
 
-if (!$link) {
-    die("Ошибка: Невозможно установить соединение");   
+    if (!$DB) {
+        die("Ошибка: Невозможно установить соединение");
+    }
+
+
+    $dataUsers = $DB->query('SELECT username, age, email from users');
+
+
+    $users = $dataUsers->fetch_all(MYSQLI_ASSOC);
+
+    // var_dump($users);
+
+    mysqli_close($DB);
+    
+    return $users;
 }
 
-
-$users = $link->query('SELECT username, age from users WHERE age > 50');
-
-var_dump($users);
+function addUser($data) {
+    $DB = mysqli_connect("127.0.0.1", "root", "1111", "website");
 
 
-mysqli_close($link);
+    if (!$DB) {
+        die("Ошибка: Невозможно установить соединение");
+    }
+    
+    
+    $sql = "INSERT INTO users (username, email, `password`, phone, age) ";    
+    $sql .= "VALUES('{$data['name']}', '{$data['email']}', '{$data['password']}', '{$data['phone']}', '{$data['age']}')";
+
+    $resultQuery = $DB->query($sql);
+
+    mysqli_close($DB);
+    
+    return $resultQuery;
+}
+
+//$user = [
+//    "username" => 'vasa-1',
+//    "email" => 'vasa-1@gmail.com',
+//    "password" => '555555555',
+//    "phone" => '+38073555222',
+//    "age" => 25,
+//];
+
+// addUser($user);
