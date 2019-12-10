@@ -45,8 +45,6 @@ formManager.valid = function () {
 
 formManager.send = function () {
 
-    console.log(this)
-
     if (this.valid() === false) return null;
 
     var data = {
@@ -55,13 +53,17 @@ formManager.send = function () {
         phone: this.phone.value,
         password: this.password.value,
         subscribe: this.subscribe.checked,
-    }
+    };
 
     fetch('/login', {
         method: 'POST',
         body: JSON.stringify(data)
+    }).then(function(response){
+        return response.json();
+    }).then(function(data){
+        alert(data.message);
     });
-}
+};
 
 
 formManager.setClearHandler = function () {
