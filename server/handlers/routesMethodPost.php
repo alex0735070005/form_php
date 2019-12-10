@@ -1,7 +1,7 @@
 <?php
 
 if ($method === 'POST') {
-    if ($route === '/login') {
+    if ($route === '/registration') {
         $request = json_decode(file_get_contents('php://input'), true);
 
         $isValid = valid($request);

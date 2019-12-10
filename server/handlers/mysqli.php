@@ -9,7 +9,7 @@ function getUsers() {
     }
 
 
-    $dataUsers = $DB->query('SELECT username, age, email from users');
+    $dataUsers = $DB->query('SELECT id, username, email, phone from users');
 
 
     $users = $dataUsers->fetch_all(MYSQLI_ASSOC);
