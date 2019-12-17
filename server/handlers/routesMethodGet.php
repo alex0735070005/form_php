@@ -2,6 +2,10 @@
 
 if ($method === 'GET') {
     
+    $currentUser = $_SESSION['user'];
+    
+    $isAdmin = !empty($currentUser) && $currentUser['email'] === 'admin@gmail.com';
+    
     if(empty($_SESSION['routes'])) {
         $_SESSION['routes'] = [];
     }
@@ -34,14 +38,18 @@ if ($method === 'GET') {
     }
     
     if ($route === '/login') {
+        $error = '';
         include './views/login.php';
     }
     
-    if ($route === '/users') {
+    if ($route === '/users' && $isAdmin) {
         
         $users = getUsers();
         
         include './views/users.php';
+        
+    } elseif($route === '/users') {
+        header('Location: /login');
     }
 
     include './views/footer.php';
